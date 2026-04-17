@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("/biblioteca")
 public class ExemploController {
-    public List<Livro> livros;
+
+    private List<Livro> livros;
 
     public ExemploController() {
-        this.livros = new ArrayList<Livro>();
+        livros = new ArrayList<>();
 
-        this.livros.add(new Livro(1, "Livro 1", "Autor 1", 2020));
-        this.livros.add(new Livro(2, "Livro 2", "Autor 2", 2021));
-        this.livros.add(new Livro(3, "Livro 3", "Autor 3", 2022));
-        this.livros.add(new Livro(4, "Livro 4", "Autor 4", 2023));
+        livros.add(new Livro(110, "Aprendendo Java", "Maria da Silva", 2015));
+        livros.add(new Livro(120, "Spring-Boot", "Jose de Souza", 2020));
+        livros.add(new Livro(130, "Principios SOLID", "Pedro da Silva", 2023));
+        livros.add(new Livro(140, "Padroes de Projeto", "Joana Moura", 2023));
+        livros.add(new Livro(150, "Teste Unitario", "Pedro da Silva", 2024)); 
     }
 
     @GetMapping("/")
@@ -29,29 +31,22 @@ public class ExemploController {
 
     @GetMapping("/livros")
     public List<Livro> getLivros() {
-        return this.livros;
+        return livros;
     }
-
+    
     @GetMapping("/titulos")
     public List<String> getTitulos() {
-        List<String> titulos = new ArrayList<String>();
-
-        for (Livro livro : this.livros) {
-            titulos.add(livro.titulo);
-        }
-        
-        return titulos;
+        return livros.stream()
+               .map(livro->livro.getTitulo())
+               .toList();
     }
 
     @GetMapping("/autores")
-    public List<String> getAutores() {
-        List<String> autores = new ArrayList<String>();
-
-        for (Livro livro : this.livros) {
-            autores.add(livro.autor);
-        }
-        
-        return autores;
+    public List<String> getListaAutores() {
+        return livros.stream()
+                .map(l -> l.getAutor())
+                .distinct()
+                .toList();
     }
 
 }

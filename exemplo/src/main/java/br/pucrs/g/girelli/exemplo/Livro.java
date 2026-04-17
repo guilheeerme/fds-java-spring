@@ -1,10 +1,10 @@
 package br.pucrs.g.girelli.exemplo;
 
 public class Livro {
-    public int id;
-    public String titulo;
-    public String autor;
-    public int ano;
+    private int id;
+    private String titulo;
+    private String autor;
+    private int ano;
 
     public Livro(int id, String titulo, String autor, int ano) {
         this.id = id;
@@ -12,5 +12,25 @@ public class Livro {
         this.autor = autor;
         this.ano = ano;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    @Override
+    public String toString() {
+        return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", ano=" + ano + "]";
+    }
 }
